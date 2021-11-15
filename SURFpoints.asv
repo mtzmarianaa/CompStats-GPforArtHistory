@@ -1,0 +1,17 @@
+function [ArtistPoints] = geSURFpoints(Artist)
+% Funcion that extracts the 10 strongest SURF points of each painting by each of the
+% artists' channels. These are:
+%    - location
+%    - metric
+%    - scale
+%    - sign of laplacian
+
+[~, m] = size(Artist);
+ArtistPoints = zeros(m,20);
+
+for k = 1:m
+    I = Artist{k};
+    points = detectSURFFeatures(I);
+    strongestPoints = selectStrongest(points, 4);
+    ArtistPoints(m, :) = [strongestPoints.Location(:, 1)',strongestPoints.Location(:, 2)', strongestPoints.Metric', strongestPoints.Scale', strongestPoints.SignOfLaplacian'];
+end
