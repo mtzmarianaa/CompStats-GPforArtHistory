@@ -86,6 +86,7 @@ T(17, :) = fitDiff_stats(SURF_points_train, years_train, SURF_points_test, years
 T(18, :) = fitDiff_stats(SURF_points_train, years_train, SURF_points_test, years_test, 'ardrationalquadratic', 'lbfgs');
 
 
+
 end
 
 
