@@ -1,5 +1,5 @@
 function [stats_method] = fitDiff_stats(SURF_points_train, years_train, SURF_points_test, years_test, KernelFunction, Optimizer)
-tic()
+
 method = fitrgp(SURF_points_train, years_train, 'KernelFunction', KernelFunction, 'Optimizer', Optimizer);
 % Lets see how we did on our training data
 [predictions_training,~,intervals_training] = predict(method, SURF_points_train);

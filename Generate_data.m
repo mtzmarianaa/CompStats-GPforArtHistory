@@ -17,9 +17,17 @@ tic()
 % training
 METAD = readtable("Paintings_metadata_general.csv");
 years_training = METAD{:, 'Year'};
+years_training_features = zeros(4*length(years_training), 1);
+for k=1:length(years_training)
+    years_training_features(4*k-3:4*k) = years_training(k);
+end
 % test
 METAD_test = readtable("Paintings_metadata_test.csv");
 years_test = METAD_test{:, 'Year'};
+years_test_features = zeros(4*length(years_test), 1);
+for k=1:length(years_test)
+    years_test_features(4*k-3:4*k) = years_test(k);
+end
 
 % For each channel (red, green, blue) we get the SURF descriptors
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -45,30 +53,70 @@ RedChannelPoints_train = [RamosMartRSURFPoints; MeridaRSURFPoints; ...
 
 xlswrite("Red_training", [ years_training , RedChannelPoints_train]);
 
+% Training with features
+RamosMartRSURFfeat = getSURFfeatures(RamosMartR);
+MeridaRSURFfeat = getSURFfeatures(MeridaR);
+RiveraRSURFfeat = getSURFfeatures(RiveraR);
+FridaRSURFfeat = getSURFfeatures(FridaR);
+AtlRSURFfeat = getSURFfeatures(AtlR);
+OrozcoRSURFfeat = getSURFfeatures(OrozcoR);
+CarringtonRSURFfeat = getSURFfeatures(CarringtonR);
+IzquierdoRSURFfeat = getSURFfeatures(IzquierdoR);
+VaroRSURFfeat = getSURFfeatures(VaroR);
+TamayoRSURFfeat = getSURFfeatures(TamayoR);
+
+
+RedChannelfeat_train = [RamosMartRSURFfeat; MeridaRSURFfeat; ...
+    RiveraRSURFfeat; FridaRSURFfeat; AtlRSURFfeat; ...
+    OrozcoRSURFfeat; CarringtonRSURFfeat; ...
+    IzquierdoRSURFfeat; VaroRSURFfeat; TamayoRSURFfeat];
+
+xlswrite("Red_training_feat", [ years_training_features , RedChannelfeat_train]);
+
+
 % PCA
 coeff_red = pca(RedChannelPoints_train);
 % we just use the first 5 PC
 RedChannelPoints_train_PC = RedChannelPoints_train*coeff_red(:, 1:5);
 xlswrite("Red_training_PC", [ years_training , RedChannelPoints_train_PC]);
 
+coeff_red_feat = pca(RedChannelfeat_train);
+% we just use the first 5 PC
+RedChannelfeat_train_PC = RedChannelfeat_train*coeff_red_feat(:, 1:5);
+xlswrite("Red_training_PC_feat", [ years_training_features , RedChannelfeat_train_PC])
+
 % test
 testRSURFPoints = getSURFpoints(test_R);
 xlswrite("Red_test", [ years_test , testRSURFPoints]);
 
+testRSURFfeat = getSURFfeatures(test_R);
+xlswrite("Red_test_feat", [ years_test_features , testRSURFfeat]);
+
 RedChannelPoints_test_PC = testRSURFPoints*coeff_red(:, 1:5);
 xlswrite("Red_test_PC", [ years_test , RedChannelPoints_test_PC]);
+
+RedChannelfeat_test_PC = testRSURFfeat*coeff_red_feat(:, 1:5);
+xlswrite("Red_test_PC_feat", [ years_test_features , RedChannelfeat_test_PC]);
 
 
 % unknown
 unknownRSURFPoints = getSURFpoints(unknown_R);
 xlswrite("Red_unknown", unknownRSURFPoints);
 
+unknownRSURFfeat = getSURFfeatures(unknown_R);
+xlswrite("Red_unknown_feat", unknownRSURFfeat);
+
 unknownRSURFPoints_PC = unknownRSURFPoints*coeff_red(:, 1:5);
 xlswrite("Red_unknown_PC", unknownRSURFPoints_PC);
+
+unknownRSURFfeat_PC = unknownRSURFfeat*coeff_red_feat(:, 1:5);
+xlswrite("Red_unknown_PC_feat", unknownRSURFfeat_PC);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GREEN
 
+
+% training
 RamosMartGSURFPoints = getSURFpoints(RamosMartG);
 MeridaGSURFPoints = getSURFpoints(MeridaG);
 RiveraGSURFPoints = getSURFpoints(RiveraG);
@@ -80,6 +128,7 @@ IzquierdoGSURFPoints = getSURFpoints(IzquierdoG);
 VaroGSURFPoints = getSURFpoints(VaroG);
 TamayoGSURFPoints = getSURFpoints(TamayoG);
 
+
 GreenChannelPoints_train = [RamosMartGSURFPoints; MeridaGSURFPoints; ...
     RiveraGSURFPoints; FridaGSURFPoints; AtlGSURFPoints; ...
     OrozcoGSURFPoints; CarringtonGSURFPoints; ...
@@ -87,29 +136,71 @@ GreenChannelPoints_train = [RamosMartGSURFPoints; MeridaGSURFPoints; ...
 
 xlswrite("Green_training", [ years_training , GreenChannelPoints_train]);
 
+% Training with features
+RamosMartGSURFfeat = getSURFfeatures(RamosMartG);
+MeridaGSURFfeat = getSURFfeatures(MeridaG);
+RiveraGSURFfeat = getSURFfeatures(RiveraG);
+FridaGSURFfeat = getSURFfeatures(FridaG);
+AtlGSURFfeat = getSURFfeatures(AtlG);
+OrozcoGSURFfeat = getSURFfeatures(OrozcoG);
+CarringtonGSURFfeat = getSURFfeatures(CarringtonG);
+IzquierdoGSURFfeat = getSURFfeatures(IzquierdoG);
+VaroGSURFfeat = getSURFfeatures(VaroG);
+TamayoGSURFfeat = getSURFfeatures(TamayoG);
+
+
+GreenChannelfeat_train = [RamosMartGSURFfeat; MeridaGSURFfeat; ...
+    RiveraGSURFfeat; FridaGSURFfeat; AtlGSURFfeat; ...
+    OrozcoGSURFfeat; CarringtonGSURFfeat; ...
+    IzquierdoGSURFfeat; VaroGSURFfeat; TamayoGSURFfeat];
+
+xlswrite("Green_training_feat", [ years_training_features , GreenChannelfeat_train]);
+
+
 % PCA
 coeff_green = pca(GreenChannelPoints_train);
 % we just use the first 5 PC
-GreenChannelPoints_train_PC = GreenChannelPoints_train*coeff_red(:, 1:5);
+GreenChannelPoints_train_PC = GreenChannelPoints_train*coeff_green(:, 1:5);
 xlswrite("Green_training_PC", [ years_training , GreenChannelPoints_train_PC]);
+
+coeff_green_feat = pca(GreenChannelfeat_train);
+% we just use the first 5 PC
+GreenChannelfeat_train_PC = GreenChannelfeat_train*coeff_green_feat(:, 1:5);
+xlswrite("Green_training_PC_feat", [ years_training_features , GreenChannelfeat_train_PC])
 
 % test
 testGSURFPoints = getSURFpoints(test_G);
 xlswrite("Green_test", [ years_test , testGSURFPoints]);
 
-GreenChannelPoints_test_PC = testGSURFPoints*coeff_red(:, 1:5);
+testGSURFfeat = getSURFfeatures(test_G);
+xlswrite("Green_test_feat", [ years_test_features , testGSURFfeat]);
+
+GreenChannelPoints_test_PC = testGSURFPoints*coeff_green(:, 1:5);
 xlswrite("Green_test_PC", [ years_test , GreenChannelPoints_test_PC]);
+
+GreenChannelfeat_test_PC = testGSURFfeat*coeff_green_feat(:, 1:5);
+xlswrite("Green_test_PC_feat", [ years_test_features , GreenChannelfeat_test_PC]);
+
 
 % unknown
 unknownGSURFPoints = getSURFpoints(unknown_G);
 xlswrite("Green_unknown", unknownGSURFPoints);
 
-unknownGSURFPoints_PC = unknownGSURFPoints*coeff_red(:, 1:5);
+unknownGSURFfeat = getSURFfeatures(unknown_G);
+xlswrite("Green_unknown_feat", unknownGSURFfeat);
+
+unknownGSURFPoints_PC = unknownGSURFPoints*coeff_green(:, 1:5);
 xlswrite("Green_unknown_PC", unknownGSURFPoints_PC);
+
+unknownGSURFfeat_PC = unknownGSURFfeat*coeff_green_feat(:, 1:5);
+xlswrite("Green_unknown_PC_feat", unknownGSURFfeat_PC);
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BLUE
 
+% training
 RamosMartBSURFPoints = getSURFpoints(RamosMartB);
 MeridaBSURFPoints = getSURFpoints(MeridaB);
 RiveraBSURFPoints = getSURFpoints(RiveraB);
@@ -129,24 +220,63 @@ BlueChannelPoints_train = [RamosMartBSURFPoints; MeridaBSURFPoints; ...
 
 xlswrite("Blue_training", [ years_training , BlueChannelPoints_train]);
 
+% Training with features
+RamosMartBSURFfeat = getSURFfeatures(RamosMartB);
+MeridaBSURFfeat = getSURFfeatures(MeridaB);
+RiveraBSURFfeat = getSURFfeatures(RiveraB);
+FridaBSURFfeat = getSURFfeatures(FridaB);
+AtlBSURFfeat = getSURFfeatures(AtlB);
+OrozcoBSURFfeat = getSURFfeatures(OrozcoB);
+CarringtonBSURFfeat = getSURFfeatures(CarringtonB);
+IzquierdoBSURFfeat = getSURFfeatures(IzquierdoB);
+VaroBSURFfeat = getSURFfeatures(VaroB);
+TamayoBSURFfeat = getSURFfeatures(TamayoB);
+
+
+BlueChannelfeat_train = [RamosMartBSURFfeat; MeridaBSURFfeat; ...
+    RiveraBSURFfeat; FridaBSURFfeat; AtlBSURFfeat; ...
+    OrozcoBSURFfeat; CarringtonBSURFfeat; ...
+    IzquierdoBSURFfeat; VaroBSURFfeat; TamayoBSURFfeat];
+
+xlswrite("Blue_training_feat", [ years_training_features , BlueChannelfeat_train]);
+
+
 % PCA
-coeff_Blue = pca(BlueChannelPoints_train);
+coeff_blue = pca(BlueChannelPoints_train);
 % we just use the first 5 PC
-BlueChannelPoints_train_PC = BlueChannelPoints_train*coeff_red(:, 1:5);
+BlueChannelPoints_train_PC = BlueChannelPoints_train*coeff_blue(:, 1:5);
 xlswrite("Blue_training_PC", [ years_training , BlueChannelPoints_train_PC]);
+
+coeff_blue_feat = pca(BlueChannelfeat_train);
+% we just use the first 5 PC
+BlueChannelfeat_train_PC = BlueChannelfeat_train*coeff_blue_feat(:, 1:5);
+xlswrite("Blue_training_PC_feat", [ years_training_features , BlueChannelfeat_train_PC])
 
 % test
 testBSURFPoints = getSURFpoints(test_B);
 xlswrite("Blue_test", [ years_test , testBSURFPoints]);
 
-BlueChannelPoints_test_PC = testBSURFPoints*coeff_red(:, 1:5);
+testBSURFfeat = getSURFfeatures(test_B);
+xlswrite("Blue_test_feat", [ years_test_features , testBSURFfeat]);
+
+BlueChannelPoints_test_PC = testBSURFPoints*coeff_blue(:, 1:5);
 xlswrite("Blue_test_PC", [ years_test , BlueChannelPoints_test_PC]);
+
+BlueChannelfeat_test_PC = testBSURFfeat*coeff_blue_feat(:, 1:5);
+xlswrite("Blue_test_PC_feat", [ years_test_features , BlueChannelfeat_test_PC]);
+
 
 % unknown
 unknownBSURFPoints = getSURFpoints(unknown_B);
 xlswrite("Blue_unknown", unknownBSURFPoints);
 
-unknownBSURFPoints_PC = unknownBSURFPoints*coeff_red(:, 1:5);
+unknownBSURFfeat = getSURFfeatures(unknown_B);
+xlswrite("Blue_unknown_feat", unknownBSURFfeat);
+
+unknownBSURFPoints_PC = unknownBSURFPoints*coeff_blue(:, 1:5);
 xlswrite("Blue_unknown_PC", unknownBSURFPoints_PC);
+
+unknownBSURFfeat_PC = unknownBSURFfeat*coeff_blue_feat(:, 1:5);
+xlswrite("Blue_unknown_PC_feat", unknownBSURFfeat_PC);
 
 toc()
