@@ -31,7 +31,6 @@ interval_length_average_test = mean( abs( intervals_test(:,1) - intervals_test(:
 which_worse_test = find( abs(intervals_test(:,1) - intervals_test(:,2)) ==  max_interval_length_test );
 which_worse_test = which_worse_test(1,1);
 percentage_lowerError_mean_test = length( find( abs( predictions_test -  years_test ) <=   error_average_test  ))/length(predictions_test);
-
 problematic_testing = find( abs( predictions_test -  years_test ) >  ...
     error_average_test  );
 

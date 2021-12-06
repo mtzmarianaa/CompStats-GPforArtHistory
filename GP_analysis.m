@@ -225,35 +225,35 @@ toc()
 
 'SURF points'
 Table_red
-xlswrite('Table_red_SURF.csv', T_red)
+%xlswrite('Table_red_SURF.csv', T_red)
 Table_green
-xlswrite('Table_green_SURF.csv', T_green)
+%xlswrite('Table_green_SURF.csv', T_green)
 Table_blue
-xlswrite('Table_blue_SURF.csv', T_blue)
+%xlswrite('Table_blue_SURF.csv', T_blue)
 
 'SURF points with PC'
 Table_red_PC
-xlswrite('Table_redPC_SURF.csv', T_red_PC)
+%xlswrite('Table_redPC_SURF.csv', T_red_PC)
 Table_green_PC
-xlswrite('Table_greenPC_SURF.csv', T_green_PC)
+%xlswrite('Table_greenPC_SURF.csv', T_green_PC)
 Table_blue_PC
-xlswrite('Table_bluePC_SURF.csv', T_blue_PC)
+%xlswrite('Table_bluePC_SURF.csv', T_blue_PC)
 
 'SURF features'
 Table_red_feat
-xlswrite('Table_red_feat.csv', T_red_feat)
+%xlswrite('Table_red_feat.csv', T_red_feat)
 Table_green_feat
-xlswrite('Table_green_feat.csv', T_green_feat)
+%xlswrite('Table_green_feat.csv', T_green_feat)
 Table_blue_feat
-xlswrite('Table_blue_feat.csv', T_blue_feat)
+%xlswrite('Table_blue_feat.csv', T_blue_feat)
 
 'SURF features with PC'
 Table_red_PC_feat
-xlswrite('Table_redPC_feat.csv', T_red_PC_feat)
+%xlswrite('Table_redPC_feat.csv', T_red_PC_feat)
 Table_green_PC_feat
-xlswrite('Table_greenPC_feat.csv', T_green_PC_feat)
+%xlswrite('Table_greenPC_feat.csv', T_green_PC_feat)
 Table_blue_PC_feat
-xlswrite('Table_bluePC_feat.csv', T_blue_PC_feat)
+%xlswrite('Table_bluePC_feat.csv', T_blue_PC_feat)
 
 
 
