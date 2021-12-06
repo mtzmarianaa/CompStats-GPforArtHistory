@@ -1,4 +1,8 @@
-function [RamosMartR,RamosMartG, RamosMartB, MeridaR,MeridaG, MeridaB, RiveraR, RiveraG, RiveraB, FridaR, FridaG, FridaB, AtlR, AtlG, AtlB, OrozcoR, OrozcoG, OrozcoB, CarringtonR, CarringtonG, CarringtonB, IzquierdoR,IzquierdoG, IzquierdoB, VaroR, VaroG, VaroB, TamayoR, TamayoG, TamayoB ] = readImagesChannels()
+function [RamosMartR,RamosMartG, RamosMartB, RiveraR, RiveraG, RiveraB, ...
+    FridaR, FridaG, FridaB, AtlR, AtlG, AtlB, OrozcoR, OrozcoG, OrozcoB, ...
+    VaroR, VaroG, VaroB, TamayoR, TamayoG, TamayoB , ...
+    MarinR, MarinG, MarinB, VasconcelosR, VasconcelosG, VasconcelosB, ...
+    RebullR, RebullG, RebullB] = readImagesChannels()
 % This function reads paintings (from images) from 10 different Mexican
 % aritsts. This function also standarizes the scale so that each image
 % read has the same size.
@@ -24,24 +28,6 @@ for k = 1:length(jpegFiles)
   i = i+1;
 end
 
-
-% Carlos Merida
-myFolder = 'CarlosMerida';
-filePattern = fullfile(myFolder, '*.jpg');
-jpegFiles = dir(filePattern);
-MeridaR = {};
-MeridaG = {};
-MeridaB = {};
-i = 1;
-for k = 1:length(jpegFiles)
-  baseFileName = jpegFiles(k).name;
-  fullFileName = fullfile(myFolder, baseFileName);
-  imageArray = imread(fullFileName);
-  MeridaR (i) = {imresize(imageArray(:,:,1), [1536, 2048])};
-  MeridaG(i) = {imresize(imageArray(:,:,2), [1536, 2048])};
-  MeridaB(i) = {imresize(imageArray(:,:,3), [1536, 2048])};
-  i = i+1;
-end
 
 
 % Diego Rivera
@@ -118,41 +104,7 @@ for k = 1:length(jpegFiles)
   i = i+1;
 end
 
-% Leonora Carrington
-myFolder = 'LeonoraCarrington';
-filePattern = fullfile(myFolder, '*.jpg');
-jpegFiles = dir(filePattern);
-CarringtonR = {};
-CarringtonG = {};
-CarringtonB = {};
-i = 1;
-for k = 1:length(jpegFiles)
-  baseFileName = jpegFiles(k).name;
-  fullFileName = fullfile(myFolder, baseFileName);
-  imageArray = imread(fullFileName);
-  CarringtonR (i) = {imresize(imageArray(:,:,1), [1536, 2048])};
-  CarringtonG(i) = {imresize(imageArray(:,:,2), [1536, 2048])};
-  CarringtonB(i) = {imresize(imageArray(:,:,3), [1536, 2048])};
-  i = i+1;
-end
 
-% Maria Izquierdo
-myFolder = 'MariaIzquierdo';
-filePattern = fullfile(myFolder, '*.jpg');
-jpegFiles = dir(filePattern);
-IzquierdoR = {};
-IzquierdoG = {};
-IzquierdoB = {};
-i = 1;
-for k = 1:length(jpegFiles)
-  baseFileName = jpegFiles(k).name;
-  fullFileName = fullfile(myFolder, baseFileName);
-  imageArray = imread(fullFileName);
-  IzquierdoR (i) = {imresize(imageArray(:,:,1), [1536, 2048])};
-  IzquierdoG(i) = {imresize(imageArray(:,:,2), [1536, 2048])};
-  IzquierdoB(i) = {imresize(imageArray(:,:,3), [1536, 2048])};
-  i = i+1;
-end
 
 % Remedios Varo
 myFolder = 'RemediosVaro';
@@ -189,5 +141,69 @@ for k = 1:length(jpegFiles)
   TamayoB(i) = {imresize(imageArray(:,:,3), [1536, 2048])};
   i = i+1;
 end
+
+
+
+% Javier Marin
+myFolder = 'JavierMarin';
+filePattern = fullfile(myFolder, '*.jpg');
+jpegFiles = dir(filePattern);
+MarinR = {};
+MarinG = {};
+MarinB = {};
+i = 1;
+for k = 1:length(jpegFiles)
+  baseFileName = jpegFiles(k).name;
+  fullFileName = fullfile(myFolder, baseFileName);
+  imageArray = imread(fullFileName);
+  MarinR (i) = {imresize(imageArray(:,:,1), [1536, 2048])};
+  MarinG(i) = {imresize(imageArray(:,:,2), [1536, 2048])};
+  MarinB(i) = {imresize(imageArray(:,:,3), [1536, 2048])};
+  i = i+1;
+end
+
+
+
+% Jose Maria Vasconcelos
+myFolder = 'Vasconcelos';
+filePattern = fullfile(myFolder, '*.jpg');
+jpegFiles = dir(filePattern);
+VasconcelosR = {};
+VasconcelosG = {};
+VasconcelosB = {};
+i = 1;
+for k = 1:length(jpegFiles)
+  baseFileName = jpegFiles(k).name;
+  fullFileName = fullfile(myFolder, baseFileName);
+  imageArray = imread(fullFileName);
+  VasconcelosR (i) = {imresize(imageArray(:,:,1), [1536, 2048])};
+  VasconcelosG(i) = {imresize(imageArray(:,:,2), [1536, 2048])};
+  VasconcelosB(i) = {imresize(imageArray(:,:,3), [1536, 2048])};
+  i = i+1;
+end
+
+
+% Santiago Rebull
+myFolder = 'SantiagoRebull';
+filePattern = fullfile(myFolder, '*.jpg');
+jpegFiles = dir(filePattern);
+RebullR = {};
+RebullG = {};
+RebullB = {};
+i = 1;
+for k = 1:length(jpegFiles)
+  baseFileName = jpegFiles(k).name;
+  fullFileName = fullfile(myFolder, baseFileName);
+  imageArray = imread(fullFileName);
+  RebullR (i) = {imresize(imageArray(:,:,1), [1536, 2048])};
+  RebullG(i) = {imresize(imageArray(:,:,2), [1536, 2048])};
+  RebullB(i) = {imresize(imageArray(:,:,3), [1536, 2048])};
+  i = i+1;
+end
+
+
+
+
+
 
 end

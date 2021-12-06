@@ -10,7 +10,7 @@ function [T] = analysis_GP_channel(SURF_points_train, years_train, SURF_points_t
 
 % 
 
-T = zeros(18, 7);
+T = zeros(18, 13);
 
 % NOW WE CHANGE SOME PARAMETERS: Kernel function + optimization method
 

@@ -16,29 +16,47 @@ Red_training_PC = table2array(readtable("Generated_data/Red_training_PC.csv"));
 Green_training_PC = table2array(readtable("Generated_data/Green_training_PC.csv"));
 Blue_training_PC = table2array(readtable("Generated_data/Blue_training_PC.csv"));
 
-Red_training_PCRed_training_PC = table2array(readtable("Generated_data/Red_training_PC.csv"));
-Green_training_PC = table2array(readtable("Generated_data/Green_training_PC.csv"));
-Blue_training_PC = table2array(readtable("Generated_data/Blue_training_PC.csv")); = table2array(readtable("Generated_data/Red_training_PC.csv"));
-Green_training_PC = table2array(readtable("Generated_data/Green_training_PC.csv"));
-Blue_training_PC = table2array(readtable("Generated_data/Blue_training_PC.csv"));
+Red_training_PC_feat = table2array(readtable("Generated_data/Red_training_PC_feat.csv"));
+Green_training_PC_feat = table2array(readtable("Generated_data/Green_training_PC_feat.csv"));
+Blue_training_PC_feat = table2array(readtable("Generated_data/Blue_training_PC_feat.csv"));
 
 % read testing known data
 Red_test = table2array(readtable("Generated_data/Red_test.csv"));
 Green_test = table2array(readtable("Generated_data/Green_test.csv"));
 Blue_test = table2array(readtable("Generated_data/Blue_test.csv"));
 
+Red_test_feat = table2array(readtable("Generated_data/Red_test_feat.csv"));
+Green_test_feat = table2array(readtable("Generated_data/Green_test_feat.csv"));
+Blue_test_feat = table2array(readtable("Generated_data/Blue_test_feat.csv"));
+
 Red_test_PC = table2array(readtable("Generated_data/Red_test_PC.csv"));
 Green_test_PC = table2array(readtable("Generated_data/Green_test_PC.csv"));
 Blue_test_PC = table2array(readtable("Generated_data/Blue_test_PC.csv"));
+
+Red_test_PC_feat = table2array(readtable("Generated_data/Red_test_PC_feat.csv"));
+Green_test_PC_feat = table2array(readtable("Generated_data/Green_test_PC_feat.csv"));
+Blue_test_PC_feat = table2array(readtable("Generated_data/Blue_test_PC_feat.csv"));
 
 % read testing unknown data
 Red_unknown = table2array(readtable("Generated_data/Red_unknown.csv"));
 Green_unknown = table2array(readtable("Generated_data/Green_unknown.csv"));
 Blue_unknown = table2array(readtable("Generated_data/Blue_unknown.csv"));
 
+Red_unknown_feat = table2array(readtable("Generated_data/Red_unknown_feat.csv"));
+Green_unknown_feat = table2array(readtable("Generated_data/Green_unknown_feat.csv"));
+Blue_unknown_feat = table2array(readtable("Generated_data/Blue_unknown_feat.csv"));
+
 Red_unknown_PC = table2array(readtable("Generated_data/Red_unknown_PC.csv"));
 Green_unknown_PC = table2array(readtable("Generated_data/Green_unknown_PC.csv"));
 Blue_unknown_PC = table2array(readtable("Generated_data/Blue_unknown_PC.csv"));
+
+Red_unknown_PC_feat = table2array(readtable("Generated_data/Red_unknown_PC_feat.csv"));
+Green_unknown_PC_feat = table2array(readtable("Generated_data/Green_unknown_PC_feat.csv"));
+Blue_unknown_PC_feat = table2array(readtable("Generated_data/Blue_unknown_PC_feat.csv"));
+
+
+
+
 
 T_red = analysis_GP_channel(Red_training(:, 2:21), Red_training(:, 1), ...
     Red_test(:, 2:21), Red_test(:, 1));
@@ -59,41 +77,119 @@ Table_blue = array2table(T_blue, 'VariableNames', {'error_L2_train', ...
     'error_Linf_train', 'max_interval_length_train', 'error_L2_test', ..., 
     'error_Linf_test', 'max_interval_length_test', 'time_taken'});
 
-Table_red
-Table_green
-Table_blue
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% As we can see this is bullshit, maybe dimensionality problems?
 
 T_red_PC = analysis_GP_channel(Red_training_PC(:, 2:6), Red_training_PC(:, 1), ...
     Red_test_PC(:, 2:6), Red_test_PC(:, 1));
-Table_red_PC = array2table(T_red, 'VariableNames', {'error_L2_train', ...
+Table_red_PC = array2table(T_red_PC, 'VariableNames', {'error_L2_train', ...
     'error_Linf_train', 'max_interval_length_train', 'error_L2_test', ..., 
     'error_Linf_test', 'max_interval_length_test', 'time_taken'});
 
 T_green_PC = analysis_GP_channel(Green_training_PC(:, 2:6), Green_training_PC(:, 1), ...
     Green_test_PC(:, 2:6), Green_test_PC(:, 1));
-Table_green_PC = array2table(T_green, 'VariableNames', {'error_L2_train', ...
+Table_green_PC = array2table(T_green_PC, 'VariableNames', {'error_L2_train', ...
     'error_Linf_train', 'max_interval_length_train', 'error_L2_test', ..., 
     'error_Linf_test', 'max_interval_length_test', 'time_taken'});
 
 
 T_blue_PC = analysis_GP_channel(Blue_training_PC(:, 2:6), Blue_training_PC(:, 1), ...
     Blue_test_PC(:, 2:6), Blue_test_PC(:, 1));
-Table_blue_PC = array2table(T_blue, 'VariableNames', {'error_L2_train', ...
+Table_blue_PC = array2table(T_blue_PC, 'VariableNames', {'error_L2_train', ...
     'error_Linf_train', 'max_interval_length_train', 'error_L2_test', ..., 
     'error_Linf_test', 'max_interval_length_test', 'time_taken'});
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Still horrible, we use SURF features instead
+
+error_L2_train, error_Linf_train, error_average_train, ...
+    max_interval_length_train, interval_length_average_train, which_worse_train, ...
+    error_L2_test, error_Linf_test, error_average_test, ...
+    max_interval_length_test, interval_length_average_test, which_worse_test,...
+    time_taken
+
+T_red_feat = analysis_GP_channel(Red_training_feat ...
+    (:, 2:65), Red_training_feat(:, 1), ...
+    Red_test_feat(:, 2:65), Red_test_feat(:, 1));
+Table_red_feat = array2table(T_red_feat, 'VariableNames', {'error_L2_train',...
+    'error_Linf_train', 'error_average_train', ...
+    'max_interval_length_train', 'interval_length_average_train', 'which_worse_train', ...
+    'error_L2_test', 'error_Linf_test, error_average_test', ...
+    'max_interval_length_test', 'interval_length_average_test', 'which_worse_test',...
+    'time_taken'});
+
+T_green_feat = analysis_GP_channel(Green_training_feat(:, 2:65), Green_training_feat(:, 1), ...
+    Green_test_feat(:, 2:65), Green_test_feat(:, 1));
+Table_green_feat = array2table(T_green_feat, 'VariableNames', {'error_L2_train', ...
+    'error_Linf_train', 'max_interval_length_train', 'error_L2_test', ..., 
+    'error_Linf_test', 'max_interval_length_test', 'time_taken'});
+
+
+T_blue_feat = analysis_GP_channel(Blue_training_feat(:, 2:65), Blue_training_feat(:, 1), ...
+    Blue_test_feat(:, 2:65), Blue_test_feat(:, 1));
+Table_blue_feat = array2table(T_blue_feat, 'VariableNames', {'error_L2_train', ...
+    'error_Linf_train', 'max_interval_length_train', 'error_L2_test', ..., 
+    'error_Linf_test', 'max_interval_length_test', 'time_taken'});
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% As we can see this is bullshit, maybe dimensionality problems?
+
+T_red_PC_feat = analysis_GP_channel(Red_training_PC_feat(:, 2:6), Red_training_PC_feat(:, 1), ...
+    Red_test_PC_feat(:, 2:6), Red_test_PC_feat(:, 1));
+Table_red_PC_feat = array2table(T_red_PC_feat, 'VariableNames', {'error_L2_train', ...
+    'error_Linf_train', 'max_interval_length_train', 'error_L2_test', ..., 
+    'error_Linf_test', 'max_interval_length_test', 'time_taken'});
+
+T_green_PC_feat = analysis_GP_channel(Green_training_PC_feat(:, 2:6), Green_training_PC_feat(:, 1), ...
+    Green_test_PC_feat(:, 2:6), Green_test_PC_feat(:, 1));
+Table_green_PC_feat = array2table(T_green_PC_feat, 'VariableNames', {'error_L2_train', ...
+    'error_Linf_train', 'max_interval_length_train', 'error_L2_test', ..., 
+    'error_Linf_test', 'max_interval_length_test', 'time_taken'});
+
+
+T_blue_PC_feat = analysis_GP_channel(Blue_training_PC_feat(:, 2:6), Blue_training_PC_feat(:, 1), ...
+    Blue_test_PC_feat(:, 2:6), Blue_test_PC_feat(:, 1));
+Table_blue_PC_feat = array2table(T_blue_PC_feat, 'VariableNames', {'error_L2_train', ...
+    'error_Linf_train', 'max_interval_length_train', 'error_L2_test', ..., 
+    'error_Linf_test', 'max_interval_length_test', 'time_taken'});
+
+
+SURF_points_train = Green_training_PC_feat(:, 2:6);
+years_train = Green_training_PC_feat(:, 1);
+SURF_points_test = Green_test_PC_feat(:, 2:6);
+years_test = Green_test_PC_feat(:, 1);
+
+
+'SURF points'
+Table_red
+Table_green
+Table_blue
+
+'SURF points with PC'
 Table_red_PC
 Table_green_PC
 Table_blue_PC
 
+'SURF features'
+Table_red_feat
+Table_green_feat
+Table_blue_feat
 
-
-
-% Still horrible, we use SURF features instead
+'SURF features with PC'
+Table_red_PC_feat
+Table_green_PC_feat
+Table_blue_PC_feat
 
 
 

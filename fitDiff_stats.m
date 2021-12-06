@@ -1,19 +1,28 @@
 function [stats_method] = fitDiff_stats(SURF_points_train, years_train, SURF_points_test, years_test, KernelFunction, Optimizer)
-
+tic()
 method = fitrgp(SURF_points_train, years_train, 'KernelFunction', KernelFunction, 'Optimizer', Optimizer);
 % Lets see how we did on our training data
 [predictions_training,~,intervals_training] = predict(method, SURF_points_train);
 error_L2_train = norm( predictions_training -  years_train);
 error_Linf_train = norm( predictions_training -  years_train, 'Inf');
+error_average_train = mean(  predictions_training -  years_train );
 max_interval_length_train = norm( intervals_training(:,1) - intervals_training(:,2), 'Inf' );
+interval_length_average_train = mean(  intervals_training(:,1) - intervals_training(:,2)  );
+which_worse_train = find( (intervals_training(:,1) - intervals_training(:,2)) == max_interval_length_train);
+
 % We try this with the test data
 [predictions_test,~,intervals_test] = predict(method, SURF_points_test);
 error_L2_test = norm( predictions_test -  years_test);
 error_Linf_test = norm( predictions_test -  years_test, 'Inf');
+error_average_test = mean( predictions_test -  years_test  );
 max_interval_length_test = norm( intervals_test(:,1) - intervals_test(:,2), 'Inf' );
+interval_length_average_test = mean(  intervals_test(:,1) - intervals_test(:,2) );
+which_worse_test = find( (intervals_test(:,1) - intervals_test(:,2)) ==  max_interval_length_test );
 time_taken = toc();
-stats_method = [error_L2_train, error_Linf_train, ...
-    max_interval_length_train, error_L2_test, ..., 
-    error_Linf_test, max_interval_length_test, time_taken];
+stats_method = [error_L2_train, error_Linf_train, error_average_train, ...
+    max_interval_length_train, interval_length_average_train, which_worse_train, ...
+    error_L2_test, error_Linf_test, error_average_test, ...
+    max_interval_length_test, interval_length_average_test, which_worse_test,...
+    time_taken];
 
 end
