@@ -15,7 +15,7 @@ This is a repository for the final project for Computational Statistics (MA 6973
 
  The functions in this project are:
  
- - Generate_data.m : this is a script to generate data for the different color channels (Red, Green, Blue) from SURF points, SURF descriptors, SURF points using PCA, and SURF descriptors using PCA. In order to run this scrip the user needs to download the data (). Running this script takes some time, so if the user doesn't wish to run it, all the variables that arise from running it are in generated_data_variables.mat . Therefore if the user wants to explore this variables, just call "load generated_data_variables.mat".
+ - Generate_data.m : this is a script to generate data for the different color channels (Red, Green, Blue) from SURF points, SURF descriptors, SURF points using PCA, and SURF descriptors using PCA. In order to run this scrip the user needs to download the data (https://drive.google.com/file/d/1vtyYOY6eRWRXMgH_ZeJDBHVc5MPrsgiF/view?usp=sharing). Running this script takes some time, so if the user doesn't wish to run it, all the variables that arise from running it are in generated_data_variables.mat . Therefore if the user wants to explore this variables, just call "load generated_data_variables.mat".
  - readImagesChannels.m : this is a function that is used in Generate_data.m to read all the images on different folders and separate them by color channel
  - readImagesChannels_new.m : this is a function that is used in Generate_data.m to read the test set and separate the pictures by color channel
  - getSURFpoints.m : calculates the top 4 SURF points' characterists (location, metric, scale, sign of laplacian) and puts all this information in a vector.
