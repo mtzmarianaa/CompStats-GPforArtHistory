@@ -10,7 +10,7 @@ This is a repository for the final project for Computational Statistics (MA 6973
  - Remedios Varo
  - Rufino Tamayo
  - Javier Marin
- - José María Vasconcelos
+ - José María Velasco
  - Santiago Rebull
 
  The functions in this project are:
