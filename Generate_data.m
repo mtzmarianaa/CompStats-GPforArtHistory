@@ -1,4 +1,9 @@
-% Script to obtain the SURF vectors
+% Script to obtain the SURF vectors and SURF features. This might be slow
+% but it gives the same variables as the ones saved in
+% generated_data_variables.mat so if you don't want to run this all over
+% again you can just do "load generated_data_variables.mat"
+
+
 tic()
 % We read the images
 
