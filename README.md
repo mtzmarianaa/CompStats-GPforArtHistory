@@ -24,7 +24,7 @@ This is a repository for the final project for Computational Statistics (MA 6973
  - plotEstimatedSURFpoints.m : plots the top SURF points on a painting
  - GP_analysis.m : this is the final script to make conclusions. It uses fitDiff_stats.m with the different methods of information extraction from Generate_data.m and produces tables with information about the different fits. This is extremely slow so if the user doesn't want to run this but want to explore the variables generated, they can be found on GP_analysis_variables.mat so just call "GP_analysis_variables.mat" to explore them.
  
- 
+ The data needed to run all this code can be downloaded from here (be sure to just put it in the same folder as this repo): https://drive.google.com/file/d/1onJWGE7WTicNjm4CbxP3brTtfmuyu0KR/view?usp=sharing
  
 Most of the data and idea comes from Mariana Martinez's undegraduate thesis which can be found here: https://drive.google.com/file/d/1qcijLmFHaO14YUyFAXb8tquHLi15eWBV/view?usp=sharing . An abstract of such work in English can be found here: https://drive.google.com/file/d/1ME1wgtvle-0SLcirI48rROM7mg99MBmL/view?usp=sharing .
  
